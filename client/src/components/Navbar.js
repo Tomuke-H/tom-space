@@ -48,6 +48,11 @@ const Navbar = (props) => {
           Components
         </Menu.Item >
       </Link>
+      <Link to='/user'>
+        <Menu.Item active={location.pathname == '/user'} >
+          User
+        </Menu.Item >
+      </Link>
       <Menu.Menu position="right">{rightNavItems()}</Menu.Menu>
     </Menu>
   );

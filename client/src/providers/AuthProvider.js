@@ -8,6 +8,7 @@ const AuthProvider = (props) => {
 
     const handleRegister = async (user, history) => {
         try {
+            console.log(user)
             let res = await axios.post('/api/auth', user)
             setUser(res.data.data)
             history.push('/')
