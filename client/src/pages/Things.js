@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from 'styled-components'
 import useAxiosOnMount from "../hooks/useAxiosOnMount";
 import ErrorMessage from "../components/ErrorMessage";
