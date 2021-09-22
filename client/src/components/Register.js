@@ -6,14 +6,13 @@ import { AuthContext } from '../providers/AuthProvider';
 const Register = () => {
     const {handleRegister} = useContext(AuthContext);
     const [email, setEmail] = useState('test@test.com')
-    const [name, setName] = useState('Tester123')
     const [password, setPassword] = useState('123456')
     const [passwordConfirmation, setPasswordConfirmation] = useState('123456')
     const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegister({email, password, name}, history)
+        handleRegister({email, password }, history)
     }
 
     return (
