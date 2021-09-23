@@ -7,5 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'faker'
-Thing.create(name: Faker::Company.name)
-Thing.create(name: Faker::Company.name)
+
+User.destroy_all
+
+10.times do
+    u = User.create(email: Faker::Internet.email, password: "123456")
+    3.times do
+        p = u.posts.create(title: 'Some Post', text: Faker::TvShows::NewGirl.quote, likes: 3)
+        3.times do
+            p.comments.create(text: Faker::GreekPhilosophers.quote, name: "Billy")
+        end
+    end
+end
+
+puts "#{User.all.size} users"
+puts "#{Post.all.size} posts"
+puts "#{Comment.all.size} comments"
