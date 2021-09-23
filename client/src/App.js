@@ -10,6 +10,7 @@ import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import FetchUser from './components/FetchUser';
 import UserPage from './pages/UserPage';
+import UsersPage from './pages/UsersPage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
             <ProtectedRoute exact path='/user' component={UserPage} />
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
+            <Route exact path='/users' component={UsersPage}/>
             <Route component={()=><p>react 404 path not found</p>} />
           </Switch>
         </Container>
