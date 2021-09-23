@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useContext, useEffect, useState } from 'react'
 import { Card, Header } from 'semantic-ui-react'
+import Friends from '../components/Friends'
 import Post from '../components/Post'
 import PostForm from '../components/PostForm'
 import User from '../components/User'
@@ -36,6 +37,7 @@ const UserPage = () => {
     return (
         <>
             <User user={user} />
+            <Friends />
             <PostForm />
             {renderPosts()}
         </>
