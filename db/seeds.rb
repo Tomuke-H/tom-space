@@ -11,7 +11,7 @@ require 'faker'
 User.destroy_all
 
 10.times do
-    u = User.create(email: Faker::Internet.email, password: "123456")
+    u = User.create(email: Faker::Internet.email, name: Faker::Name.name, password: "123456")
     3.times do
         p = u.posts.create(title: 'Some Post', text: Faker::TvShows::NewGirl.quote, likes: 3)
         3.times do

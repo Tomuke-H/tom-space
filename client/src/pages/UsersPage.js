@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import User from '../components/User';
+import Friend from '../components/OtherUser';
+
 
 const UsersPage = () => {
     const [users, setUsers] = useState([])
@@ -25,7 +26,7 @@ const UsersPage = () => {
         return users.map(f => {
             return (
                 <div key={f.id}>
-                    <User user={f}/>
+                    <Friend user={f}/>
                 </div>
             )
         })

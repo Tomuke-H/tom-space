@@ -4,19 +4,25 @@ import { Button, Form } from 'semantic-ui-react';
 import { AuthContext } from '../providers/AuthProvider';
 
 const Register = () => {
-    const {handleRegister} = useContext(AuthContext);
+    const {handleRegister, loading} = useContext(AuthContext);
     const [email, setEmail] = useState('test@test.com')
     const [password, setPassword] = useState('123456')
     const [passwordConfirmation, setPasswordConfirmation] = useState('123456')
+    const [name, setName] = useState('Tester Testerson')
     const history = useHistory();
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegister({email, password }, history)
+        handleRegister({email, password, name }, history)
     }
 
     return (
         <Form onSubmit={handleSubmit}>
+            <Form.Input 
+                value={name}
+                label="Name"
+                onChange={(e) => setName(e.target.value)}
+            />
             <Form.Input 
                 value={email}
                 label="Email"
@@ -32,7 +38,7 @@ const Register = () => {
                 label="Confirm Password"
                 onChange={(e) => setPasswordConfirmation(e.target.value)}
             />
-            <Button>Login</Button>
+            <Button loading={loading} disabled={loading}>Register</Button>
         </Form>
     );
 }

@@ -10,7 +10,9 @@ import Register from './components/Register';
 import ProtectedRoute from './components/ProtectedRoute';
 import FetchUser from './components/FetchUser';
 import UserPage from './pages/UserPage';
-import UsersPage from './pages/UsersPage';
+import EditUser from './pages/EditUser';
+import FindFriends from './pages/FindFriends';
+import FriendPage from './pages/FriendPage';
 
 function App() {
   return (
@@ -25,7 +27,9 @@ function App() {
             <ProtectedRoute exact path='/user' component={UserPage} />
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
-            <Route exact path='/users' component={UsersPage}/>
+            <ProtectedRoute exact path='/find_friends' component={FindFriends}/>
+            <ProtectedRoute exact path='/edit_user' component={EditUser}/>
+            <Route exact path='/friend_page/:id' component={FriendPage}/>
             <Route component={()=><p>react 404 path not found</p>} />
           </Switch>
         </Container>

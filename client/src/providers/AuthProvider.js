@@ -5,6 +5,8 @@ export const AuthContext = React.createContext();
 
 const AuthProvider = (props) => {
     const [user, setUser] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null)
 
     const handleRegister = async (user, history) => {
         try {
@@ -18,11 +20,26 @@ const AuthProvider = (props) => {
         }
     };
 
+    const handleUserUpdate = async (user, history) => {
+        try {
+            setError(null)
+            setLoading(true)
+            let res = await axios.put('/api/auth', user)
+            setUser(res.data.data)
+            history.push('/')
+        }catch(err){
+            setError(err.response.data.errors ? err.response.data.errors : err.response.data)
+            console.log(err)
+        }finally{
+            setLoading(false)
+        }
+    }
+
     const handleLogin = async (user, history) => {
         try{
             let res = await axios.post('/api/auth/sign_in', user)
             setUser(res.data.data)
-            history.push('/things')
+            history.push('/user')
         }catch (err) {
             alert('cannot login! is broke!')
             console.log(err)
@@ -36,7 +53,17 @@ const AuthProvider = (props) => {
     };
     
     return (
-        <AuthContext.Provider value={{user, setUser, handleRegister, handleLogin, handleLogout, authenticated: user ? true : false}}>
+        <AuthContext.Provider value={{
+            user, 
+            loading,
+            error,
+            handleUserUpdate, 
+            setUser, 
+            handleRegister, 
+            handleLogin, 
+            handleLogout, 
+            authenticated: user ? true : false
+        }}>
             {props.children}
         </AuthContext.Provider>
     );
