@@ -29,7 +29,7 @@ const UserPage = () => {
             return <p>No Posts</p>
         }
         return posts.map((p) => 
-            <Post post={p}/>
+            <Post key={p.id} post={p}/>
             )
     }
 
