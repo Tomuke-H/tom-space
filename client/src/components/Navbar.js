@@ -52,11 +52,6 @@ const Navbar = (props) => {
               Find Friends
             </Menu.Item >
           </Link>
-          <Link to='/components'>
-            <Menu.Item active={location.pathname === '/components'} >
-              Components
-            </Menu.Item >
-          </Link>
           <Link to='/user'>
             <Menu.Item active={location.pathname === '/user'} >
               {user.name}

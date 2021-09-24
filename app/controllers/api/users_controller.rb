@@ -14,7 +14,7 @@ class Api::UsersController < ApplicationController
     end
 
     def remove_friend
-        current_user.friends.reject { |id| id == params[:id].to_i }
+        current_user.friends = current_user.friends.reject { |id| id == params[:id].to_i }
         if(current_user.save)
             render json: current_user.friends
         else
