@@ -2,14 +2,14 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Form, Segment } from 'semantic-ui-react'
 
-const CommentForm = () => {
+const CommentForm = ({post}) => {
     const [friendsName, setFriendsName] = useState('')
     const [text, setText] = useState('')
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            let res = await axios.post('/api/comments', {text, name: friendsName})
+            let res = await axios.post(`/api/posts/${post.id}/comments`, {text, name: friendsName})
             console.log(res.data)
         }catch (err) {
             console.log(err)
@@ -18,7 +18,7 @@ const CommentForm = () => {
 
     return (
         <Segment>
-            <Form onSubmit={handleSubmit}>
+            <Form size="small"  onSubmit={handleSubmit}>
                 
                 <Form.Input
                     value={text}
@@ -30,7 +30,7 @@ const CommentForm = () => {
                     label="Name"
                     onChange={(e) => setFriendsName(e.target.value)}
                     />
-                <Button size="small" color='blue'>Comment</Button>
+                <Button size="tiny" >Comment</Button>
             </Form>
         </Segment>
     )

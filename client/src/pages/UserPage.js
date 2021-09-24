@@ -19,6 +19,7 @@ const UserPage = () => {
         try {
             let res = await axios.get("/api/posts")
             setPosts(res.data)
+            
         } catch (error) {
             alert('error')
         }
@@ -52,9 +53,6 @@ const UserPage = () => {
             )
     }
 
-
-
-    
     return (
         <>
             <User user={user} />
