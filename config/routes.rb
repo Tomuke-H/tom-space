@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     get 'users', to: 'users#index'
     get 'friends', to: 'users#friends'
     put 'add_friend/:id', to: 'users#add_friend'
+    put 'remove_friend/:id', to: 'users#remove_friend'
     resources :posts do
       resources :comments
     end

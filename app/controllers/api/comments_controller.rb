@@ -4,7 +4,7 @@ class Api::CommentsController < ApplicationController
     before_action :set_comment, only: [:update, :destroy]
 
     def index
-        @post.comments.find(params[:id])
+        render json: @post.comments.all
     end
 
     def create

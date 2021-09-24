@@ -1,31 +1,47 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import User from './User';
+import React, { useContext, useEffect, useState } from 'react';
+import { AuthContext } from '../providers/AuthProvider';
+import Friend from './Friend';
 
 const Friends = () => {
-    const [friends, setFriends] = useState([])
+    const [users, setUsers] = useState([])
+    const {user} = useContext(AuthContext)
 
     useEffect(()=>{
         getFriends();
     },[])
 
+    const friendRemoved = (id) => {
+        let filteredUsers = users.filter(u => u.id !== id)
+        setUsers(filteredUsers)
+      }
+  
     const getFriends = async () => {
         try {
-            let res = await axios.get('/api/friends')
-            setFriends(res.data)
+            let res = await axios.get('/api/users')
+            let allUsers = res.data
+            let filterSelf = allUsers.filter(u => u.id !== user.id)
+
+            if(user.friends.length > 0){
+            let userFriendsIds = user.friends
+            let friends = filterSelf.filter(u => userFriendsIds.indexOf(u.id) !== -1)
+                setUsers(friends)
+            } else {
+                setUsers([])
+            }
         }catch (err) {
             alert(err)
         }
     }
 
     const renderFriends = () => {
-        if(friends.length === 0){
+        if(users.length === 0){
             return (<h1>Yall have no friends!</h1>)
         }
-        return friends.map(f => {
+        return users.map(f => {
             return (
                 <div key={f.id}>
-                    <User user={f}/>
+                    <Friend friendRemoved={friendRemoved} friend={f}/>
                 </div>
             )
         })
