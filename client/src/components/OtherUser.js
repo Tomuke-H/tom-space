@@ -3,11 +3,12 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import { Button, Card } from 'semantic-ui-react';
 
-const OtherUser = ({user}) => {
+const OtherUser = ({user, friendAdded}) => {
     const history = useHistory();
     const addFriend = async (id) => {
         try {
             let res = await axios.put(`/api/add_friend/${id}`)
+            friendAdded(id)
         }catch(err){
             alert(err)
         }
