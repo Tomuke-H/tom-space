@@ -25,7 +25,7 @@ function App() {
             <ProtectedRoute exact path='/user' component={UserPage} />
             <Route exact path='/login' component={Login}/>
             <Route exact path='/register' component={Register}/>
-            <Route exact path='/users' component={UsersPage}/>
+            <ProtectedRoute exact path='/users' component={UsersPage}/>
             <Route component={()=><p>react 404 path not found</p>} />
           </Switch>
         </Container>

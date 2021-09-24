@@ -24,14 +24,35 @@ const UserPage = () => {
         }
     }
 
+    const editPost = async (id) => {
+        try {
+            let res= await axios.put(`/api/posts/${id}/edit`)
+        } catch (error) {
+            
+        }
+    }
+
+    const deletePost = async (id) => {
+        try {
+          let res = await axios.delete(`/api/posts/${id}`)
+          setPosts(posts.filter((p) => p.id !== id))
+          
+        } catch (error) {
+          
+        }
+        
+    }
+
     const renderPosts = () => {
         if (posts.length == 0) {
             return <p>No Posts</p>
         }
         return posts.map((p) => 
-            <Post key={p.id} post={p}/>
+            <Post key={p.id} post={p} deletePost={deletePost} editPost={editPost}/>
             )
     }
+
+
 
     
     return (

@@ -22,7 +22,7 @@ const AuthProvider = (props) => {
         try{
             let res = await axios.post('/api/auth/sign_in', user)
             setUser(res.data.data)
-            history.push('/things')
+            history.push('/user')
         }catch (err) {
             alert('cannot login! is broke!')
             console.log(err)

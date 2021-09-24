@@ -6,7 +6,7 @@ import CommentForm from './CommentForm'
 const PostForm = () => {
     const [title, setTitle] = useState('')
     const [text, setText] = useState('')
-    const [commentForm, setCommentForm] = useState(false)
+
 
 
     const handleSubmit = async (e) => {
@@ -34,9 +34,7 @@ const PostForm = () => {
                     onChange={(e) => setText(e.target.value)}
                     />
                 <Button color='blue'>Post</Button>
-                <Button onClick={()=> setCommentForm(!commentForm)}>Comment</Button>
             </Form>
-            {commentForm && <CommentForm />}
         </Segment>
     )
 }
