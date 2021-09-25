@@ -35,6 +35,7 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
       <Comment 
       key={c.id} 
       comment={c} 
+      deleteComment={deleteComment}
       />
       )
     }
@@ -47,6 +48,15 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
           alert(err)
       }
   }
+
+    const deleteComment = async(id) => {
+      try {
+        await axios.delete(`api/posts/${post.id}/comments/${id}`)
+        setComments(comments.filter((c)=> c.id !== id))
+      } catch (error) {
+        
+      }
+    }
 
   return (
     <Card>
@@ -91,7 +101,7 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
 
 export default Post;
 
-const FloatRightIcon = styled(Icon)`
+export const FloatRightIcon = styled(Icon)`
   float: right ;
 
 `

@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Form, Segment } from 'semantic-ui-react'
 
-const CommentForm = ({post, addComment}) => {
+const CommentForm = ({post, addComment }) => {
     const [friendsName, setFriendsName] = useState('')
     const [text, setText] = useState('')
 
