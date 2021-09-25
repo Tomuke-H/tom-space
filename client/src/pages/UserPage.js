@@ -85,7 +85,10 @@ const UserPage = () => {
         <>
             <User user={user} />
             <Friends />
-            <PostForm />
+            <PostForm 
+                updatePost={updatePost}
+                addPost={addPost}
+                posts={posts}/>
             {renderPosts()}
         </>
     )

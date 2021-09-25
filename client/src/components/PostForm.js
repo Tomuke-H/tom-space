@@ -8,13 +8,13 @@ const PostForm = (props) => {
     const [text, setText] = useState(props.text ? props.text : "")
 
     const handleSubmit = (e) => {
-        e.preventDefault();
         if (props.post) {
            props.updatePost({ id: props.post.id, title, text });
         } else {
             console.log(title, text)
-            props.addPost({ title, text });
+            props.addPost({title, text});
         }
+          { if (props.post) return props.setEditForm(false) }
           setTitle("");
           setText("");
       };
@@ -27,18 +27,16 @@ const PostForm = (props) => {
             <Form onSubmit={handleSubmit}>
                 
                 <Form.Input
-                    placeholder= {title}
                     value={title}
                     label="Title"
                     onChange={(e) => setTitle(e.target.value)}
                     />
                 <Form.Input
-                    placeholder= "hi"
                     value={text}
                     label="Text"
                     onChange={(e) => setText(e.target.value)}
                     />
-                <Button color='blue'>Post</Button>
+                <Button color='blue'>{props.post? "Update" : "Post"}</Button>
             </Form>
         </Segment>
     )

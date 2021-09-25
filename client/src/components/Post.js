@@ -50,11 +50,10 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
        link 
        name="edit" 
        onClick={()=> setEditForm(!editForm)}/>
-    {editForm && <PostForm
-      setCommentForm
-      commentForm
+    {editForm && 
+    <PostForm
+      setEditForm={setEditForm}
       post={post}
-      deletePost={deletePost}
       updatePost={updatePost}
       addPost={addPost}
       />}
