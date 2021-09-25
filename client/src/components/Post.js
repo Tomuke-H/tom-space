@@ -6,7 +6,7 @@ import CommentForm from './CommentForm';
 import PostForm from './PostForm';
 import styled from 'styled-components';
 
-function Post ({post, deletePost, editPost, like}) {
+function Post ({post, deletePost, updatePost, like, addPost}) {
   const [commentForm, setCommentForm] = useState(false)
   const [editForm, setEditForm] = useState(false)
   const [comments, setComments] = useState("")
@@ -42,9 +42,22 @@ function Post ({post, deletePost, editPost, like}) {
   return (
     <Card>
     <Card.Content>
-    <FloatRightIcon link name="trash alternate outline" onClick={() => {deletePost(post.id)}} />
-    <FloatRightIcon link name="edit" onClick={()=> setEditForm(!editForm)}/>
-    {editForm && <PostForm />}
+      <FloatRightIcon 
+       link 
+       name="trash alternate outline" 
+        onClick={() => {deletePost(post.id)}} />
+     <FloatRightIcon 
+       link 
+       name="edit" 
+       onClick={()=> setEditForm(!editForm)}/>
+    {editForm && <PostForm
+      setCommentForm
+      commentForm
+      post={post}
+      deletePost={deletePost}
+      updatePost={updatePost}
+      addPost={addPost}
+      />}
       <Divider horizontal>
         <p>{post.title}</p>
         <Icon name="angle down" />
