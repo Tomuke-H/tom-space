@@ -7,6 +7,7 @@ Rails.application.routes.draw do
     get 'friends', to: 'users#friends'
     put 'add_friend/:id', to: 'users#add_friend'
     put 'remove_friend/:id', to: 'users#remove_friend'
+    put 'posts/:id/like', to: 'posts#like'
     resources :posts do
       resources :comments
     end

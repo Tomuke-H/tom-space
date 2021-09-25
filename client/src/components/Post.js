@@ -4,8 +4,9 @@ import { Button, Card, Divider, Icon, Segment } from 'semantic-ui-react';
 import Comment from './Comment';
 import CommentForm from './CommentForm';
 import PostForm from './PostForm';
+import styled from 'styled-components';
 
-function Post ({post, deletePost, editPost}) {
+function Post ({post, deletePost, editPost, like}) {
   const [commentForm, setCommentForm] = useState(false)
   const [editForm, setEditForm] = useState(false)
   const [comments, setComments] = useState("")
@@ -37,14 +38,13 @@ function Post ({post, deletePost, editPost}) {
       />
       )
     }
-    //PASS DOWN POST INTO COMMENT FORM
 
   return (
     <Card>
     <Card.Content>
-    <Icon link name="edit" onClick={()=> setEditForm(!editForm)}/>
+    <FloatRightIcon link name="trash alternate outline" onClick={() => {deletePost(post.id)}} />
+    <FloatRightIcon link name="edit" onClick={()=> setEditForm(!editForm)}/>
     {editForm && <PostForm />}
-    <Icon link name="trash" onClick={() => {deletePost(post.id)}} />
       <Divider horizontal>
         <p>{post.title}</p>
         <Icon name="angle down" />
@@ -54,7 +54,8 @@ function Post ({post, deletePost, editPost}) {
         </Segment>
       <Divider />
       <Segment basic>
-      <Card.Meta textAlign="right">Likes: {post.likes}</Card.Meta>            
+      <Card.Meta textAlign="right">Likes: {post.likes}</Card.Meta>
+      <FloatRightIcon link name="thumbs up outline" textAlign="right" onClick={() => like(post.id)} />            
       <Button size="tiny" onClick={()=> setCommentForm(!commentForm)}>Comments</Button>
       {commentForm && renderComments()}
       {commentForm && <CommentForm post={post} />}
@@ -65,3 +66,8 @@ function Post ({post, deletePost, editPost}) {
 }
 
 export default Post;
+
+const FloatRightIcon = styled(Icon)`
+  float: right ;
+
+`

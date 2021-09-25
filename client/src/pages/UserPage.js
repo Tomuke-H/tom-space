@@ -35,7 +35,7 @@ const UserPage = () => {
 
     const deletePost = async (id) => {
         try {
-          let res = await axios.delete(`/api/posts/${id}`)
+          await axios.delete(`/api/posts/${id}`)
           setPosts(posts.filter((p) => p.id !== id))
           
         } catch (error) {
@@ -44,12 +44,21 @@ const UserPage = () => {
         
     }
 
+    const like = async (id) => {
+        console.log(id);
+        try {
+          let res = await axios.put(`/api/posts/${id}/like`);
+          let newPosts = posts.map((p) => (p.id === id ? res.data : p));
+          setPosts(newPosts);
+        } catch (err) {}
+      };
+
     const renderPosts = () => {
         if (posts.length == 0) {
             return <p>No Posts</p>
         }
         return posts.map((p) => 
-            <Post key={p.id} post={p} deletePost={deletePost} editPost={editPost}/>
+            <Post key={p.id} like={like} post={p} deletePost={deletePost} editPost={editPost}/>
             )
     }
 
