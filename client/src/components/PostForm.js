@@ -19,7 +19,6 @@ const PostForm = (props) => {
           setText("");
       };
 
-      //Make the form disappear when you post
 
     return (
         <Segment>

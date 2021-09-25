@@ -39,6 +39,15 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
       )
     }
 
+    const addComment = async (comment) => {
+      try {
+          let res = await axios.post(`/api/posts/${post.id}/comments`, comment)
+          setComments([...comments, res.data])
+      }catch (err) {
+          alert(err)
+      }
+  }
+
   return (
     <Card>
     <Card.Content>
@@ -70,7 +79,10 @@ function Post ({post, deletePost, updatePost, like, addPost}) {
       <FloatRightIcon link name="thumbs up outline" textAlign="right" onClick={() => like(post.id)} />            
       <Button size="tiny" onClick={()=> setCommentForm(!commentForm)}>Comments</Button>
       {commentForm && renderComments()}
-      {commentForm && <CommentForm post={post} />}
+      {commentForm && 
+        <CommentForm 
+        addComment={addComment}
+        post={post} />}
       </Segment>
     </Card.Content>
     </Card>

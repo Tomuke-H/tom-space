@@ -65,7 +65,6 @@ const UserPage = () => {
         }
     }
 
-
     const renderPosts = () => {
         if (posts.length == 0) {
             return <p>No Posts</p>

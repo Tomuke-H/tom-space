@@ -2,18 +2,18 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Form, Segment } from 'semantic-ui-react'
 
-const CommentForm = ({post}) => {
+const CommentForm = ({post, addComment}) => {
     const [friendsName, setFriendsName] = useState('')
     const [text, setText] = useState('')
 
+    // I would need to move this to the users page and pass down the add
+    //comment function
+
     const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            let res = await axios.post(`/api/posts/${post.id}/comments`, {text, name: friendsName})
-            console.log(res.data)
-        }catch (err) {
-            console.log(err)
-        }
+        addComment({text, name: friendsName})
+        setFriendsName("")
+        setText("")
+        
     }
 
     return (
