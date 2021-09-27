@@ -13,10 +13,9 @@ const User = ({user}) => {
     return (
         <Card>
             <Card.Content>
-                <Card.Header>User</Card.Header>
+                <Card.Header>{user.name}</Card.Header>
                 <Card.Meta>{user.email}</Card.Meta>
             </Card.Content>
-            <Button onClick={()=> addFriend(user.id)} >Add friend</Button>
         </Card>
     )
 }
