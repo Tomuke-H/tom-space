@@ -1,26 +1,28 @@
 import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Form, Segment } from 'semantic-ui-react'
-import CommentForm from './CommentForm'
 
-const PostForm = () => {
-    const [title, setTitle] = useState('')
-    const [text, setText] = useState('')
+const PostForm = (props) => {
+    console.log(props)
+    const [title, setTitle] = useState(props.title ? props.title : "")
+    const [text, setText] = useState(props.text ? props.text : "")
 
-
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            let res = await axios.post('/api/posts', {title, text})
-            console.log(res.data)
-        }catch (err) {
-            console.log(err)
+    const handleSubmit = (e) => {
+        if (props.post) {
+           props.updatePost({ id: props.post.id, title, text });
+        } else {
+            console.log(title, text)
+            props.addPost({title, text});
         }
-    }
+          { if (props.post) return props.setEditForm(false) }
+          setTitle("");
+          setText("");
+      };
+
 
     return (
         <Segment>
+            <h1>{ props.post ? "Edit Post" : "Post" }</h1>
             <Form onSubmit={handleSubmit}>
                 
                 <Form.Input
@@ -33,7 +35,7 @@ const PostForm = () => {
                     label="Text"
                     onChange={(e) => setText(e.target.value)}
                     />
-                <Button color='blue'>Post</Button>
+                <Button color='blue'>{props.post? "Update" : "Post"}</Button>
             </Form>
         </Segment>
     )

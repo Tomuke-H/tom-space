@@ -19,14 +19,17 @@ const UserPage = () => {
         try {
             let res = await axios.get("/api/posts")
             setPosts(res.data)
+            
         } catch (error) {
             alert('error')
         }
     }
 
-    const editPost = async (id) => {
+    const updatePost = async (post) => {
         try {
-            let res= await axios.put(`/api/posts/${id}/edit`)
+            let res= await axios.put(`/api/posts/${post.id}`, post)
+            let newPosts = posts.map((p) => (p.id === post.id ? post : p))
+            setPosts(newPosts)
         } catch (error) {
             
         }
@@ -34,7 +37,7 @@ const UserPage = () => {
 
     const deletePost = async (id) => {
         try {
-          let res = await axios.delete(`/api/posts/${id}`)
+          await axios.delete(`/api/posts/${id}`)
           setPosts(posts.filter((p) => p.id !== id))
           
         } catch (error) {
@@ -43,23 +46,48 @@ const UserPage = () => {
         
     }
 
+    const like = async (id) => {
+        console.log(id);
+        try {
+          let res = await axios.put(`/api/posts/${id}/like`);
+          let newPosts = posts.map((p) => (p.id === id ? res.data : p));
+          setPosts(newPosts);
+        } catch (err) {}
+      };
+
+
+      const addPost = async (post) => {
+        try {
+            let res = await axios.post('/api/posts', post)
+            setPosts([res.data, ...posts])
+        }catch (err) {
+            alert(err)
+        }
+    }
+
     const renderPosts = () => {
         if (posts.length == 0) {
             return <p>No Posts</p>
         }
         return posts.map((p) => 
-            <Post key={p.id} post={p} deletePost={deletePost} editPost={editPost}/>
+            <Post key={p.id} 
+            like={like} 
+            post={p} 
+            deletePost={deletePost} 
+            updatePost={updatePost}
+            addPost={addPost}
+            posts={posts}/>
             )
     }
 
-
-
-    
     return (
         <>
             <User user={user} />
             <Friends />
-            <PostForm />
+            <PostForm 
+                updatePost={updatePost}
+                addPost={addPost}
+                posts={posts}/>
             {renderPosts()}
         </>
     )
